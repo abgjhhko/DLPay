@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background-color: #f3f6f9;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    /* Top Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 25px;
+      padding-top: 10px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 0;
+      color: #128854;
+      font-size: 20px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .header-title {
+      color: #128854;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    /* Input Fields */
+    .input-group {
+      background: #ffffff;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      padding: 14px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .input-group i {
+      color: #128854;
+      font-size: 17px;
+      width: 25px;
+    }
+    .prefix {
+      color: #128854;
+      font-weight: 700;
+      margin-right: 15px;
+      font-size: 15px;
+    }
+    .input-group input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+      color: #333;
+      background: transparent;
+    }
+    /* Main Button */
+    .submit-btn {
+      background-color: #128854;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(18, 136, 84, 0.25);
+    }
+    .footer-links {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .footer-links p {
+      font-size: 14px;
+      color: #1a1a1a;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      color: #128854;
+      text-decoration: underline;
+    }
+    .download-app {
+      color: #1877f2;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Modal Popup */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 999;
+    }
+    .modal-card {
+      background: white;
+      width: 100%;
+      max-width: 350px;
+      border-radius: 28px;
+      padding: 28px 20px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: #f0f0f0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .modal-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1f1f1f;
+      margin-bottom: 12px;
+    }
+    .modal-subtext {
+      color: #777;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 25px;
+    }
+    .phone-highlight {
+      font-weight: 600;
+      color: #333;
+      display: block;
+      margin-top: 4px;
+    }
+    
+    /* 6-box OTP */
+    .otp-inputs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      gap: 6px;
+    }
+    .otp-box {
+      width: 44px;
+      height: 52px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      outline: none;
+      background: #fcfcfc;
+    }
+    .otp-box:focus {
+      border: 1.5px solid #128854;
+      background: #fff;
+    }
+    .resend-text {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 25px;
+    }
+    .resend-text span {
+      font-weight: 600;
+      color: #555;
+    }
+    #verify-status {
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <a class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
+    <span class="header-title">Register</span>
+  </div>
+
+  <form id="registerForm">
+    <!-- Full Name -->
+    <div class="input-group">
+      <i class="fa-regular fa-user"></i>
+      <input type="text" id="username" placeholder="Full name" required>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="password" placeholder="Password" required>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="input-group">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="confirm_password" placeholder="Confirm password" required>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="input-group">
+      <span class="prefix">+91</span>
+      <input type="tel" id="phone" placeholder="Mobile Number" maxlength="10" required>
+    </div>
+
+    <!-- Invite Code -->
+    <div class="input-group">
+      <i class="fa-solid fa-link"></i>
+      <input type="text" id="invite" placeholder="Invite Code">
+    </div>
+
+    <button type="submit" class="submit-btn">Sign Up</button>
+  </form>
+
+  <div class="footer-links">
+    <p>Already have an account? <a href="#">Login</a></p>
+    <span class="download-app">Download App</span>
+  </div>
+</div>
+
+<!-- Step 2: OTP Modal Dialog -->
+<div class="modal-overlay" id="otpModal">
+  <div class="modal-card">
+    <div class="close-btn" id="closeModal"><i class="fa-solid fa-xmark"></i></div>
+    
+    <div class="modal-title">OTP Sent</div>
+    <div class="modal-subtext">
+      A 6-digit code has been sent to
+      <span class="phone-highlight" id="displayPhone">+91</span>
+    </div>
+
+    <!-- 6 Input Boxes for OTP -->
+    <div class="otp-inputs">
+      <input type="tel" maxlength="1" class="otp-box" autofocus>
+      <input type="tel" maxlength="1" class="otp-box">
+      <input type="tel" maxlength="1" class="otp-box">
+      <input type="tel" maxlength="1" class="otp-box">
+      <input type="tel" maxlength="1" class="otp-box">
+      <input type="tel" maxlength="1" class="otp-box">
+    </div>
+
+    <div class="resend-text">
+      Didn't get the code? <span>Resend OTP (57s)</span>
+    </div>
+
+    <button type="button" class="submit-btn" id="submitOtp">Submit</button>
+    <div id="verify-status"></div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('registerForm');
+  const otpModal = document.getElementById('otpModal');
+  const closeModal = document.getElementById('closeModal');
+  const displayPhone = document.getElementById('displayPhone');
+  const phoneInput = document.getElementById('phone');
+  const otpBoxes = document.querySelectorAll('.otp-box');
+  const submitOtp = document.getElementById('submitOtp');
+  const verifyStatus = document.getElementById('verify-status');
+
+  // Sign Up दबाने पर पॉपअप खुलेगा
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    displayPhone.innerText = '+91 ' + phoneInput.value;
+    otpModal.style.display = 'flex';
+    otpBoxes[0].focus();
+  });
+
+  // Modal बंद करने के लिए
+  closeModal.addEventListener('click', function() {
+    otpModal.style.display = 'none';
+  });
+
+  // 6-digit input auto focus next logic
+  otpBoxes.forEach((box, index) => {
+    box.addEventListener('input', (e) => {
+      if (box.value.length === 1 && index < otpBoxes.length - 1) {
+        otpBoxes[index + 1].focus();
+      }
+    });
+
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && box.value.length === 0 && index > 0) {
+        otpBoxes[index - 1].focus();
+      }
+    });
+  });
+
+  // Submit दबाने पर (Testing के लिए कोई भी OTP पास)
+  submitOtp.addEventListener('click', function() {
+    let fullOtp = "";
+    otpBoxes.forEach(box => fullOtp += box.value);
+
+    if (fullOtp.length === 6) {
+      verifyStatus.style.color = "#128854";
+      verifyStatus.innerText = "Verification Successful!";
+      setTimeout(() => {
+        alert("Registration & Verification Successful!");
+      }, 300);
+    } else {
+      verifyStatus.style.color = "#d93025";
+      verifyStatus.innerText = "Please enter complete 6-digit OTP";
+    }
+  });
+</script>
+
+</body>
+</html>
