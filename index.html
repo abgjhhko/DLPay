@@ -1,354 +1,395 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi" class="h-full bg-slate-950 text-slate-100">
 <head>
   <meta charset="UTF-8">
-  <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>DLPay Admin | User Login Activity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    body {
-      background-color: #f3f6f9;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 20px 24px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    /* Top Header */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 25px;
-      padding-top: 10px;
-    }
-    .back-btn {
-      position: absolute;
-      left: 0;
-      color: #128854;
-      font-size: 20px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .header-title {
-      color: #128854;
-      font-size: 24px;
-      font-weight: 700;
-    }
-    /* Input Fields */
-    .input-group {
-      background: #ffffff;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      padding: 14px 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-    }
-    .input-group i {
-      color: #128854;
-      font-size: 17px;
-      width: 25px;
-    }
-    .prefix {
-      color: #128854;
-      font-weight: 700;
-      margin-right: 15px;
-      font-size: 15px;
-    }
-    .input-group input {
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 15px;
-      color: #333;
-      background: transparent;
-    }
-    /* Main Button */
-    .submit-btn {
-      background-color: #128854;
-      color: white;
-      border: none;
-      padding: 16px;
-      border-radius: 30px;
-      font-size: 18px;
-      font-weight: bold;
-      width: 100%;
-      margin-top: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(18, 136, 84, 0.25);
-    }
-    .footer-links {
-      text-align: center;
-      margin-top: 25px;
-    }
-    .footer-links p {
-      font-size: 14px;
-      color: #1a1a1a;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .footer-links a {
-      color: #128854;
-      text-decoration: underline;
-    }
-    .download-app {
-      color: #1877f2;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    /* Modal Popup */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.45);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 999;
-    }
-    .modal-card {
-      background: white;
-      width: 100%;
-      max-width: 350px;
-      border-radius: 28px;
-      padding: 28px 20px;
-      position: relative;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    .close-btn {
-      position: absolute;
-      top: 18px;
-      right: 20px;
-      background: #f0f0f0;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .modal-title {
-      font-size: 20px;
-      font-weight: bold;
-      color: #1f1f1f;
-      margin-bottom: 12px;
-    }
-    .modal-subtext {
-      color: #777;
-      font-size: 13px;
-      line-height: 1.4;
-      margin-bottom: 25px;
-    }
-    .phone-highlight {
-      font-weight: 600;
-      color: #333;
-      display: block;
-      margin-top: 4px;
-    }
-    
-    /* 6-box OTP */
-    .otp-inputs {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 25px;
-      gap: 6px;
-    }
-    .otp-box {
-      width: 44px;
-      height: 52px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: 600;
-      outline: none;
-      background: #fcfcfc;
-    }
-    .otp-box:focus {
-      border: 1.5px solid #128854;
-      background: #fff;
-    }
-    .resend-text {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 25px;
-    }
-    .resend-text span {
-      font-weight: 600;
-      color: #555;
-    }
-    #verify-status {
-      font-weight: bold;
-      margin-top: 15px;
-      font-size: 14px;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
   </style>
 </head>
-<body>
+<body class="h-full flex flex-col font-sans bg-slate-950 text-slate-100">
 
-<div class="container">
-  <div class="header">
-    <a class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
-    <span class="header-title">Register</span>
+<div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2"></div>
+
+<!-- Header -->
+<header class="bg-slate-900 border-b border-slate-800 px-6 py-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center font-bold text-white shadow-lg shadow-green-900/30">
+        DL
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-base font-bold text-white">DLPay Admin</h1>
+          <span class="px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">v1.0</span>
+        </div>
+        <p class="text-[11px] text-slate-400">लॉगिन एक्टिविटी ट्रैकर</p>
+      </div>
+    </div>
+    <button id="addTestUserBtn" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+      <i data-lucide="plus" class="w-4 h-4"></i> यूज़र जोड़ें
+    </button>
+  </div>
+</header>
+
+<!-- Main Dashboard Container -->
+<main class="flex-1 p-6 space-y-6 overflow-y-auto max-w-7xl w-full mx-auto">
+  <!-- Stats -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <div>
+        <span class="text-xs text-slate-400 block">कुल यूज़र</span>
+        <span id="statTotalUsers" class="text-2xl font-bold text-white">0</span>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+        <i data-lucide="users" class="w-5 h-5"></i>
+      </div>
+    </div>
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <div>
+        <span class="text-xs text-slate-400 block">सक्रिय यूज़र</span>
+        <span id="statActiveUsers" class="text-2xl font-bold text-emerald-400">0</span>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+        <i data-lucide="activity" class="w-5 h-5"></i>
+      </div>
+    </div>
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <div>
+        <span class="text-xs text-slate-400 block">कार्रवाई</span>
+        <button id="clearAllBtn" class="text-xs text-rose-400 hover:text-rose-300 font-semibold mt-1 block">डेटा रीसेट करें</button>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+        <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+      </div>
+    </div>
   </div>
 
-  <form id="registerForm">
-    <!-- Full Name -->
-    <div class="input-group">
-      <i class="fa-regular fa-user"></i>
-      <input type="text" id="username" placeholder="Full name" required>
+  <!-- Search & Filter Controls -->
+  <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <div class="relative flex-1 sm:w-72">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-400"></i>
+        <input type="text" id="searchInput" placeholder="नाम या फ़ोन खोजें..." class="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-slate-700">
+      </div>
+      <select id="statusFilter" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-300 focus:outline-none">
+        <option value="ALL">सभी स्थिति</option>
+        <option value="Active">सक्रिय</option>
+        <option value="Offline">ऑफ़लाइन</option>
+      </select>
     </div>
-
-    <!-- Password -->
-    <div class="input-group">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" id="password" placeholder="Password" required>
+    <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+      <span class="text-xs text-slate-400">दिखाया गया: <span id="displayedCount" class="font-bold text-slate-200">0</span></span>
+      <button id="exportCsvBtn" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-slate-700 transition">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> CSV निर्यात
+      </button>
     </div>
+  </div>
 
-    <!-- Confirm Password -->
-    <div class="input-group">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" id="confirm_password" placeholder="Confirm password" required>
+  <!-- Users Table -->
+  <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="bg-slate-800/60 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-800">
+          <tr>
+            <th class="py-3 px-4">नाम</th>
+            <th class="py-3 px-4">फ़ोन</th>
+            <th class="py-3 px-4">ईमेल</th>
+            <th class="py-3 px-4">लॉगिन समय</th>
+            <th class="py-3 px-4">डिवाइस</th>
+            <th class="py-3 px-4">स्थिति</th>
+            <th class="py-3 px-4 text-right">कार्रवाई</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+          <!-- Dynamically inserted -->
+        </tbody>
+      </table>
     </div>
+  </div>
+</main>
 
-    <!-- Phone Number -->
-    <div class="input-group">
-      <span class="prefix">+91</span>
-      <input type="tel" id="phone" placeholder="Mobile Number" maxlength="10" required>
+<!-- Add User Modal -->
+<div id="addUserModal" class="hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 relative shadow-2xl">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+      <h3 class="text-sm font-semibold text-white">नया यूज़र जोड़ें</h3>
+      <button id="closeAddUserModal" class="text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
     </div>
-
-    <!-- Invite Code -->
-    <div class="input-group">
-      <i class="fa-solid fa-link"></i>
-      <input type="text" id="invite" placeholder="Invite Code">
-    </div>
-
-    <button type="submit" class="submit-btn">Sign Up</button>
-  </form>
-
-  <div class="footer-links">
-    <p>Already have an account? <a href="#">Login</a></p>
-    <span class="download-app">Download App</span>
+    <form id="addUserForm" class="space-y-3.5">
+      <div>
+        <label class="block text-slate-300 font-medium text-xs mb-1">नाम</label>
+        <input type="text" id="inputName" required placeholder="पूरा नाम दर्ज करें" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-slate-600">
+      </div>
+      <div>
+        <label class="block text-slate-300 font-medium text-xs mb-1">फ़ोन नंबर</label>
+        <input type="tel" id="inputPhone" required placeholder="फ़ोन नंबर दर्ज करें" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-slate-600">
+      </div>
+      <div>
+        <label class="block text-slate-300 font-medium text-xs mb-1">ईमेल</label>
+        <input type="email" id="inputEmail" placeholder="ईमेल पता दर्ज करें (वैकल्पिक)" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-slate-600">
+      </div>
+      <div>
+        <label class="block text-slate-300 font-medium text-xs mb-1">डिवाइस</label>
+        <select id="inputDevice" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-slate-600">
+          <option value="Mobile (Android)">Mobile (Android)</option>
+          <option value="Mobile (iPhone)">Mobile (iPhone)</option>
+          <option value="Desktop (Web)">Desktop (Web)</option>
+        </select>
+      </div>
+      <div class="pt-2 flex justify-end gap-2">
+        <button type="button" id="cancelAddUserBtn" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold">रद्द करें</button>
+        <button type="submit" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold">आगे बढ़ें</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<!-- Step 2: OTP Modal Dialog -->
-<div class="modal-overlay" id="otpModal">
-  <div class="modal-card">
-    <div class="close-btn" id="closeModal"><i class="fa-solid fa-xmark"></i></div>
-    
-    <div class="modal-title">OTP Sent</div>
-    <div class="modal-subtext">
-      A 6-digit code has been sent to
-      <span class="phone-highlight" id="displayPhone">+91</span>
+<!-- OTP Modal -->
+<div id="otpModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white text-slate-900 rounded-3xl w-full max-w-sm p-6 relative shadow-2xl flex flex-col items-center">
+    <button id="closeOtpModal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <h3 class="text-xl font-bold text-slate-900 mt-2">OTP Sent</h3>
+    <p class="text-xs text-slate-500 mt-2 text-center">
+      A 6-digit code has been sent to <span id="otpDisplayPhone" class="font-bold text-slate-800">+91 0000000000</span>
+    </p>
+
+    <!-- OTP Input Boxes -->
+    <div class="flex gap-2.5 justify-center my-6">
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
+      <input type="text" maxlength="1" class="otp-digit w-10 h-12 text-center text-lg font-bold border-2 border-slate-200 rounded-xl focus:border-emerald-600 focus:outline-none" />
     </div>
 
-    <!-- 6 Input Boxes for OTP -->
-    <div class="otp-inputs">
-      <input type="tel" maxlength="1" class="otp-box" autofocus>
-      <input type="tel" maxlength="1" class="otp-box">
-      <input type="tel" maxlength="1" class="otp-box">
-      <input type="tel" maxlength="1" class="otp-box">
-      <input type="tel" maxlength="1" class="otp-box">
-      <input type="tel" maxlength="1" class="otp-box">
-    </div>
+    <p class="text-xs text-slate-400 mb-6 text-center">
+      Didn't get the code? <button id="resendOtpBtn" class="text-emerald-600 font-semibold hover:underline">Resend OTP (57s)</button>
+    </p>
 
-    <div class="resend-text">
-      Didn't get the code? <span>Resend OTP (57s)</span>
-    </div>
-
-    <button type="button" class="submit-btn" id="submitOtp">Submit</button>
-    <div id="verify-status"></div>
+    <button id="submitOtpBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/30 transition text-sm">
+      Submit
+    </button>
   </div>
 </div>
 
 <script>
-  const form = document.getElementById('registerForm');
-  const otpModal = document.getElementById('otpModal');
-  const closeModal = document.getElementById('closeModal');
-  const displayPhone = document.getElementById('displayPhone');
-  const phoneInput = document.getElementById('phone');
-  const otpBoxes = document.querySelectorAll('.otp-box');
-  const submitOtp = document.getElementById('submitOtp');
-  const verifyStatus = document.getElementById('verify-status');
+  const supabaseUrl = 'https://zypgpxuuxscsqkvdopzv.supabase.co';
+  const supabaseKey = 'sb_publishable_k3y_placeholder';
+  const supabase = window.supabase ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
 
-  // Sign Up दबाने पर पॉपअप खुलेगा
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    displayPhone.innerText = '+91 ' + phoneInput.value;
-    otpModal.style.display = 'flex';
-    otpBoxes[0].focus();
-  });
+  const INITIAL_USERS = [
+    { name: "राहुल शर्मा", phone: "+91 98765 43210", email: "rahul@example.com", loginTime: "11/11/2026, 11:30:15 AM", device: "Mobile (Android)", status: "Active" },
+    { name: "प्रिया पटेल", phone: "+91 98111 22334", email: "priya@example.com", loginTime: "11/11/2026, 11:15:00 AM", device: "Desktop (Web)", status: "Active" },
+    { name: "अमित वर्मा", phone: "+91 97222 33445", email: "amit@example.com", loginTime: "11/11/2026, 10:45:22 AM", device: "Mobile (iPhone)", status: "Offline" }
+  ];
 
-  // Modal बंद करने के लिए
-  closeModal.addEventListener('click', function() {
-    otpModal.style.display = 'none';
-  });
+  const STORAGE_KEY = 'dlpay_users';
+  let usersList = [];
+  let pendingUserData = null;
 
-  // 6-digit input auto focus next logic
-  otpBoxes.forEach((box, index) => {
-    box.addEventListener('input', (e) => {
-      if (box.value.length === 1 && index < otpBoxes.length - 1) {
-        otpBoxes[index + 1].focus();
+  function loadUsers() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        usersList = JSON.parse(stored);
+      } else {
+        usersList = [...INITIAL_USERS];
+        saveUsers();
       }
-    });
-
-    box.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && box.value.length === 0 && index > 0) {
-        otpBoxes[index - 1].focus();
-      }
-    });
-  });
-
-  // Submit दबाने पर (Testing के लिए कोई भी OTP पास)
-  submitOtp.addEventListener('click', function() {
-    let fullOtp = "";
-    otpBoxes.forEach(box => fullOtp += box.value);
-
-    if (fullOtp.length === 6) {
-      verifyStatus.style.color = "#128854";
-      verifyStatus.innerText = "Verification Successful!";
-      setTimeout(() => {
-        alert("Registration & Verification Successful!");
-      }, 300);
-    } else {
-      verifyStatus.style.color = "#d93025";
-      verifyStatus.innerText = "Please enter complete 6-digit OTP";
+    } catch (e) {
+      usersList = [...INITIAL_USERS];
     }
+    renderTable();
+    updateStats();
+  }
+
+  function saveUsers() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(usersList));
+  }
+
+  function showToast(msg) {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = 'px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 text-xs shadow-xl';
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+
+  function updateStats() {
+    document.getElementById('statTotalUsers').textContent = usersList.length;
+    document.getElementById('statActiveUsers').textContent = usersList.filter(u => u.status === 'Active').length;
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('userTableBody');
+    const q = (document.getElementById('searchInput').value || '').toLowerCase();
+    const statusFilter = document.getElementById('statusFilter').value;
+
+    const filtered = usersList.filter(u => {
+      const matchesSearch = !q || u.name.toLowerCase().includes(q) || u.phone.toLowerCase().includes(q);
+      const matchesStatus = statusFilter === 'ALL' || u.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+
+    document.getElementById('displayedCount').textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-500">कोई डेटा नहीं मिला</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map((u, i) => `
+      <tr class="hover:bg-slate-800/40 transition">
+        <td class="py-3 px-4 font-semibold text-white">${u.name}</td>
+        <td class="py-3 px-4 font-mono font-medium">${u.phone}</td>
+        <td class="py-3 px-4 text-slate-300">${u.email || 'N/A'}</td>
+        <td class="py-3 px-4 text-slate-400 text-[11px]">${u.loginTime}</td>
+        <td class="py-3 px-4 text-slate-300">${u.device}</td>
+        <td class="py-3 px-4">
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${u.status === 'Active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-700 text-slate-300'}">
+            ${u.status}
+          </span>
+        </td>
+        <td class="py-3 px-4 text-right">
+          <button onclick="removeUser(${i})" class="text-rose-400 hover:text-rose-300">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+    if (window.lucide) lucide.createIcons();
+  }
+
+  window.removeUser = function(i) {
+    usersList.splice(i, 1);
+    saveUsers();
+    updateStats();
+    renderTable();
+    showToast('यूज़र सूची से हटा दिया गया');
+  };
+
+  function exportCsv() {
+    const csv = 'Name,Phone,Email,LoginTime,Device,Status\n' +
+      usersList.map(u => `"${u.name}","${u.phone}","${u.email}","${u.loginTime}","${u.device}","${u.status}"`).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'DLPay_Logins.csv';
+    a.click();
+    showToast('CSV डाउनलोड हो गया');
+  }
+
+  // Modal handlers
+  const addUserModal = document.getElementById('addUserModal');
+  const otpModal = document.getElementById('otpModal');
+
+  document.getElementById('addTestUserBtn').addEventListener('click', () => addUserModal.classList.remove('hidden'));
+  document.getElementById('closeAddUserModal').addEventListener('click', () => addUserModal.classList.add('hidden'));
+  document.getElementById('cancelAddUserBtn').addEventListener('click', () => addUserModal.classList.add('hidden'));
+
+  document.getElementById('closeOtpModal').addEventListener('click', () => otpModal.classList.add('hidden'));
+
+  // OTP inputs handling
+  const otpInputs = document.querySelectorAll('.otp-digit');
+  otpInputs.forEach((input, idx) => {
+    input.addEventListener('input', (e) => {
+      if (e.target.value.length === 1 && idx < otpInputs.length - 1) {
+        otpInputs[idx + 1].focus();
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+        otpInputs[idx - 1].focus();
+      }
+    });
   });
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-const supabaseUrl = 'https://zvswgqddbeykgrhlovgp.supabase.co'
-const supabaseKey = 'sb_publishable_moe4DeFFdoQjVmcCLPtOmQ_VxcW9TyD'
-const supabase = createClient(supabaseUrl, supabaseKey)
+  // Form submission: triggers OTP modal and sends to Supabase
+  document.getElementById('addUserForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+    const email = document.getElementById('inputEmail').value.trim();
+    const device = document.getElementById('inputDevice').value;
 
+    pendingUserData = {
+      name: name,
+      phone: phone.startsWith('+') ? phone : '+91 ' + phone,
+      email: email || 'N/A',
+      loginTime: new Date().toLocaleString('en-IN'),
+      device: device,
+      status: 'Active'
+    };
+
+    // Populate phone number in OTP modal
+    document.getElementById('otpDisplayPhone').textContent = pendingUserData.phone;
+
+    // Supabase push (if client initialized)
+    if (supabase) {
+      try {
+        await supabase.from('Message').insert([{
+          Content: `User Register: Name=${pendingUserData.name}, Phone=${pendingUserData.phone}, Device=${pendingUserData.device}`
+        }]);
+      } catch (err) {
+        console.error('Supabase insert error:', err);
+      }
+    }
+
+    // Hide input modal and show OTP modal
+    addUserModal.classList.add('hidden');
+    otpModal.classList.remove('hidden');
+    otpInputs.forEach(input => input.value = '');
+    if (otpInputs[0]) otpInputs[0].focus();
+  });
+
+  // Submit OTP button action
+  document.getElementById('submitOtpBtn').addEventListener('click', function() {
+    if (pendingUserData) {
+      usersList.unshift(pendingUserData);
+      saveUsers();
+      updateStats();
+      renderTable();
+      pendingUserData = null;
+    }
+    otpModal.classList.add('hidden');
+    document.getElementById('addUserForm').reset();
+    showToast('ओटीपी सत्यापित और यूज़र जोड़ा गया!');
+  });
+
+  document.getElementById('clearAllBtn').addEventListener('click', function() {
+    usersList = [...INITIAL_USERS];
+    saveUsers();
+    updateStats();
+    renderTable();
+    showToast('डेटा रीसेट हुआ');
+  });
+
+  document.getElementById('searchInput').addEventListener('input', renderTable);
+  document.getElementById('statusFilter').addEventListener('change', renderTable);
+  document.getElementById('exportCsvBtn').addEventListener('click', exportCsv);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    loadUsers();
+    if (window.lucide) lucide.createIcons();
+  });
 </script>
-
 </body>
 </html>
+ 
