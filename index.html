@@ -7,43 +7,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-sm">
-        <h1 class="text-2xl font-semibold text-emerald-600 mb-6 flex items-center">
+<body class="bg-gray-50 pt-6 px-4">
+    <div class="w-full max-w-md mx-auto bg-white p-4 rounded-3xl shadow-sm">
+        <h1 class="text-xl font-semibold text-emerald-600 mb-4 flex items-center">
             <span class="mr-2 cursor-pointer">&lt;</span> Register
         </h1>
-        <form id="signupForm" class="space-y-4">
+        <form id="signupForm" class="space-y-3">
             <div>
                 <div class="relative flex items-center">
                     <span class="absolute left-4 text-gray-400">👤</span>
-                    <input type="text" id="username" placeholder="Username" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="username" placeholder="Username" required class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
                 </div>
             </div>
             <div>
                 <div class="relative flex items-center">
                     <span class="absolute left-4 text-gray-400">🔒</span>
-                    <input type="password" id="password" placeholder="Password" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                    <input type="password" id="password" placeholder="Password" required class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
                 </div>
             </div>
             <div>
                 <div class="relative flex items-center">
                     <span class="absolute left-4 text-gray-400">🔒</span>
-                    <input type="password" id="mpin" placeholder="M-PIN" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                    <input type="password" id="mpin" placeholder="M-PIN" required class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
                 </div>
             </div>
             <div>
                 <div class="relative flex items-center">
                     <span class="absolute left-4 text-gray-400">+91</span>
-                    <input type="tel" id="phone" placeholder="Phone" required class="w-full pl-16 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                    <input type="tel" id="phone" placeholder="Phone" required class="w-full pl-16 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
                 </div>
             </div>
             <div>
                 <div class="relative flex items-center">
                     <span class="absolute left-4 text-gray-400">🔗</span>
-                    <input type="text" id="referral" placeholder="Referral Code" class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="referral" placeholder="Referral Code" class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-gray-800 focus:outline-none focus:border-emerald-500">
                 </div>
             </div>
-            <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-full shadow-lg transition duration-200 mt-6">
+            <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-full shadow-lg transition duration-200 mt-4">
                 Sign Up
             </button>
         </form>
