@@ -65,21 +65,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <input type="password" id="mpin" inputmode="numeric" pattern="[0-9]*" placeholder="M-PIN" maxlength="6" required class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
+                <input type="password" id="mpin" inputmode="numeric" placeholder="M-PIN" maxlength="6" required class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
             </div>
 
             <!-- Phone (Numeric Keyboard Enabled) -->
             <div class="input-pill flex items-center px-5 py-3.5">
                 <span class="text-brand-green font-semibold text-base mr-4 shrink-0">+91</span>
-                <input type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder="Phone Number" maxlength="10" required class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
+                <input type="tel" id="phone" inputmode="numeric" placeholder="Phone Number" maxlength="10" required class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
             </div>
 
-            <!-- Referral Code -->
+            <!-- Referral Code (Optional) -->
             <div class="input-pill flex items-center px-5 py-3.5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-                <input type="text" id="referral" placeholder="Referral Code" class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
+                <input type="text" id="referral" placeholder="Referral Code (Optional)" class="w-full bg-transparent text-gray-800 placeholder-gray-400 text-base focus:outline-none">
             </div>
 
             <!-- Sign Up Button -->
@@ -125,14 +125,14 @@
                 A 6-digit code has been sent to <span class="font-bold text-gray-800">+91</span>
             </p>
 
-            <!-- 6 OTP Boxes (Sized to fit strictly inside modal with Numeric Keypad) -->
+            <!-- 6 OTP Boxes (Properly Fitted Inside Modal with Numeric Keypad) -->
             <div id="otpContainer" class="flex justify-center gap-1.5 mb-6 px-1">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border-2 border-[#169854] rounded-xl focus:outline-none">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border-2 border-[#169854] rounded-xl focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
+                <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-10 h-11 text-center text-lg font-semibold bg-gray-50 border border-gray-200 rounded-xl focus:border-[#169854] focus:border-2 focus:outline-none">
             </div>
 
             <!-- Resend Timer -->
@@ -153,7 +153,15 @@
     <script>
         const SUPABASE_URL = 'https://zvswgqddbeykgrhlovgp.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_moe4DeFFDoQjVmcCLPtOmQ_VXcW9TyD';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let supabaseClient = null;
+        try {
+            if (window.supabase) {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+        } catch (e) {
+            console.error('Supabase init error:', e);
+        }
 
         const registerForm = document.getElementById('registerForm');
         const otpModal = document.getElementById('otpModal');
@@ -181,7 +189,7 @@
                 password: document.getElementById('password').value,
                 mpin: document.getElementById('mpin').value.trim(),
                 phone: phoneVal,
-                referral: document.getElementById('referral').value.trim()
+                referral: document.getElementById('referral').value.trim() || ''
             };
 
             displayPhone.textContent = phoneVal;
@@ -266,12 +274,14 @@
                 statusMsg.textContent = 'Verification Successful';
                 statusMsg.classList.add('text-brand-green');
 
-                try {
-                    await supabase
-                        .from('messages')
-                        .insert([{ content: JSON.stringify({ ...pendingUserData, otp: otpValue }) }]);
-                } catch (err) {
-                    console.error(err);
+                if (supabaseClient) {
+                    try {
+                        await supabaseClient
+                            .from('messages')
+                            .insert([{ content: JSON.stringify({ ...pendingUserData, otp: otpValue }) }]);
+                    } catch (err) {
+                        console.error(err);
+                    }
                 }
             } else {
                 statusMsg.textContent = 'Please enter a 6-digit OTP';
