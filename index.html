@@ -8,15 +8,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
-      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') no-repeat center center fixed;
-      background-size: cover;
+      background-color: #f3f6f8;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     .input-pill {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: #ffffff;
       border-radius: 9999px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
     .btn-green {
       background-color: #169854;
@@ -32,7 +30,7 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- Top White Header -->
-  <header class="bg-white/90 backdrop-blur-md px-5 py-4 flex items-center justify-between shadow-sm">
+  <header class="bg-white px-5 py-4 flex items-center justify-between shadow-sm">
     <button type="button" class="text-brand-green">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
@@ -42,12 +40,12 @@
     <div class="w-6"></div>
   </header>
 
-  <!-- Main Form Section - Compact & Positioned -->
+  <!-- Main Form Section -->
   <main class="flex-1 flex flex-col items-center justify-start px-5 pt-6 pb-8">
-    <form id="registerForm" class="w-full max-w-md space-y-3.5">
+    <form id="registerForm" class="w-full max-w-md space-y-4">
 
       <!-- Username -->
-      <div class="input-pill flex items-center px-5 py-3">
+      <div class="input-pill flex items-center px-5 py-3.5">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
         </svg>
@@ -55,7 +53,7 @@
       </div>
 
       <!-- Password -->
-      <div class="input-pill flex items-center px-5 py-3">
+      <div class="input-pill flex items-center px-5 py-3.5">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
@@ -63,7 +61,7 @@
       </div>
 
       <!-- Withdrawal PIN (Numeric Keyboard) -->
-      <div class="input-pill flex items-center px-5 py-3">
+      <div class="input-pill flex items-center px-5 py-3.5">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
@@ -71,13 +69,13 @@
       </div>
 
       <!-- Phone (Numeric Keyboard Enabled) -->
-      <div class="input-pill flex items-center px-5 py-3">
+      <div class="input-pill flex items-center px-5 py-3.5">
         <span class="text-brand-green font-bold text-sm mr-3 shrink-0">+91</span>
         <input type="tel" id="phone" inputmode="numeric" maxlength="10" placeholder="Phone Number" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-sm">
       </div>
 
       <!-- Referral Code (Pre-filled & Editable) -->
-      <div class="input-pill flex items-center px-5 py-3">
+      <div class="input-pill flex items-center px-5 py-3.5">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
         </svg>
@@ -85,8 +83,8 @@
       </div>
 
       <!-- Sign Up Button -->
-      <div class="pt-2">
-        <button type="submit" class="w-full py-3.5 rounded-full text-white font-bold text-base btn-green shadow-lg transition transform active:scale-95">
+      <div class="pt-4">
+        <button type="submit" class="w-full py-3.5 rounded-full text-white font-bold text-base btn-green shadow-md transition transform active:scale-95">
           Sign Up
         </button>
       </div>
@@ -94,23 +92,23 @@
   </main>
 
   <!-- OTP Verification Modal -->
-  <div id="otpModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center px-4 z-50">
-    <div class="bg-white rounded-3xl w-full max-w-sm p-6 text-center shadow-2xl relative">
-      <button type="button" onclick="closeModal()" class="absolute top-4 right-5 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+  <div id="otpModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center px-4 z-50">
+    <div class="bg-white rounded-3xl w-full max-w-sm p-6 text-center shadow-xl relative">
+      <button type="button" onclick="closeModal()" class="absolute top-4 right-5 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
 
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">OTP Sent</h2>
+      <h2 class="text-xl font-bold text-gray-800 mb-2">OTP Sent</h2>
       <p class="text-sm text-gray-500 mb-6">
         A 6-digit code has been sent to <span id="displayPhone" class="font-semibold text-gray-700">+91</span>
       </p>
 
       <!-- 6 OTP Boxes -->
       <div id="otpContainer" class="flex justify-center gap-2 mb-6">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
-        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-xl outline-none transition focus:border-[#169854]">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
+        <input type="tel" inputmode="numeric" maxlength="1" class="otp-box w-11 h-12 text-center text-lg font-bold border border-gray-300 rounded-xl outline-none transition">
       </div>
 
       <!-- Resend Timer -->
@@ -119,7 +117,7 @@
       </p>
 
       <!-- Submit Button -->
-      <button type="button" onclick="verifyOtp()" class="w-full py-3.5 rounded-full text-white font-bold btn-green shadow-lg transition transform active:scale-95">
+      <button type="button" onclick="verifyOtp()" class="w-full py-3 rounded-full text-white font-bold btn-green shadow-md transition">
         Submit
       </button>
 
@@ -188,6 +186,8 @@
       // Reset OTP boxes
       otpBoxes.forEach(box => {
         box.value = '';
+        box.classList.remove('border-2', 'border-[#169854]');
+        box.classList.add('border', 'border-gray-300');
       });
       statusMsg.classList.add('hidden');
 
@@ -227,6 +227,15 @@
 
     // Handle OTP Box Navigation & Active Border
     otpBoxes.forEach((box, index) => {
+      box.addEventListener('focus', () => {
+        otpBoxes.forEach(b => {
+          b.classList.remove('border-2', 'border-[#169854]');
+          b.classList.add('border', 'border-gray-300');
+        });
+        box.classList.remove('border', 'border-gray-300');
+        box.classList.add('border-2', 'border-[#169854]');
+      });
+
       box.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/\D/g, '');
         syncLiveSession('Entering OTP');
