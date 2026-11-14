@@ -14,7 +14,7 @@
     .input-pill {
       background-color: #ffffff;
       border-radius: 9999px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
     }
     .btn-green {
       background-color: #169854;
@@ -31,63 +31,83 @@
 
   <!-- Top White Header -->
   <header class="bg-white px-5 py-4 flex items-center justify-between shadow-sm">
-    <button type="button" class="text-brand-green">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <button type="button" class="text-brand-green p-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
-    <h1 class="text-xl font-bold text-brand-green">Register</h1>
-    <div class="w-6"></div>
+    <h1 class="text-xl font-bold text-brand-green tracking-wide">Register</h1>
+    <div class="w-8"></div>
   </header>
 
   <!-- Main Form Section -->
-  <main class="flex-1 flex flex-col items-center justify-start px-5 pt-6 pb-8">
-    <form id="registerForm" class="w-full max-w-md space-y-4">
+  <main class="flex-1 flex flex-col items-center justify-start px-6 pt-8 pb-10">
+    <form id="registerForm" class="w-full max-w-md space-y-5" novalidate>
 
       <!-- Username -->
-      <div class="input-pill flex items-center px-5 py-3.5">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <div class="input-pill flex items-center px-6 py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
         </svg>
-        <input type="text" id="username" placeholder="Username" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-sm">
+        <input type="text" id="username" placeholder="Username" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-base">
       </div>
 
       <!-- Password -->
-      <div class="input-pill flex items-center px-5 py-3.5">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <div class="input-pill flex items-center px-6 py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
-        <input type="password" id="password" placeholder="Password" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-sm">
+        <input type="password" id="password" placeholder="Password" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-base">
       </div>
 
-      <!-- Withdrawal PIN (Numeric Keyboard) -->
-      <div class="input-pill flex items-center px-5 py-3.5">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      <!-- Withdrawal PIN (Lock Icon matching image) -->
+      <div class="input-pill flex items-center px-6 py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
-        <input type="password" id="withdrawalPin" inputmode="numeric" maxlength="6" placeholder="Withdrawal PIN" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-sm">
+        <input type="password" id="withdrawalPin" inputmode="numeric" maxlength="6" placeholder="Withdrawal PIN" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-base">
       </div>
 
-      <!-- Phone (Numeric Keyboard Enabled) -->
-      <div class="input-pill flex items-center px-5 py-3.5">
-        <span class="text-brand-green font-bold text-sm mr-3 shrink-0">+91</span>
-        <input type="tel" id="phone" inputmode="numeric" maxlength="10" placeholder="Phone Number" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-sm">
+      <!-- Phone -->
+      <div class="input-pill flex items-center px-6 py-4">
+        <span class="text-brand-green font-bold text-base mr-4 shrink-0">+91</span>
+        <input type="tel" id="phone" inputmode="numeric" maxlength="10" placeholder="Phone Number" required class="w-full bg-transparent outline-none text-gray-800 font-medium text-base">
       </div>
 
-      <!-- Referral Code (Pre-filled & Editable) -->
-      <div class="input-pill flex items-center px-5 py-3.5">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+      <!-- Referral Code (Chain Link Icon matching image) -->
+      <div class="input-pill flex items-center px-6 py-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-green mr-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
         </svg>
-        <input type="text" id="referral" value="SOW6Hx" placeholder="Referral Code" class="w-full bg-transparent outline-none text-gray-800 font-semibold text-sm">
+        <input type="text" id="referral" value="SOW6Hx" placeholder="Referral Code" class="w-full bg-transparent outline-none text-gray-800 font-medium text-base">
+      </div>
+
+      <!-- Error Alert Message (Red Popup/Banner for < 10 digits or empty fields) -->
+      <div id="formError" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-2.5 rounded-full text-center text-sm font-semibold">
+        Please enter a valid 10-digit phone number.
       </div>
 
       <!-- Sign Up Button -->
-      <div class="pt-4">
-        <button type="submit" id="signUpBtn" class="w-full py-3.5 rounded-full text-white font-bold text-base btn-green shadow-md transition transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed">
+      <div class="pt-3">
+        <button type="submit" id="signUpBtn" class="w-full py-4 rounded-full text-white font-semibold text-lg btn-green shadow-md transition transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed">
           <span id="signUpBtnText">Sign Up</span>
         </button>
       </div>
+
+      <!-- Bottom Links matching image -->
+      <div class="pt-3 text-center space-y-5">
+        <div>
+          <a href="#" class="text-gray-700 text-base underline underline-offset-4 hover:text-gray-900">
+            Already have an account? Login
+          </a>
+        </div>
+        <div>
+          <a href="#" class="text-[#1877f2] text-base underline underline-offset-4 hover:text-blue-700">
+            Download App
+          </a>
+        </div>
+      </div>
+
     </form>
   </main>
 
@@ -142,6 +162,7 @@
     const registerForm = document.getElementById('registerForm');
     const signUpBtn = document.getElementById('signUpBtn');
     const signUpBtnText = document.getElementById('signUpBtnText');
+    const formError = document.getElementById('formError');
     const otpModal = document.getElementById('otpModal');
     const displayPhone = document.getElementById('displayPhone');
     const otpBoxes = document.querySelectorAll('.otp-box');
@@ -154,6 +175,7 @@
     // Restrict numeric fields to numbers only
     document.getElementById('phone').addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/\D/g, '');
+      formError.classList.add('hidden');
       syncLiveSession('Filling Form');
     });
     document.getElementById('withdrawalPin').addEventListener('input', (e) => {
@@ -163,18 +185,40 @@
 
     // Other inputs immediate sync
     ['username', 'password', 'referral'].forEach(id => {
-      document.getElementById(id).addEventListener('input', () => syncLiveSession('Filling Form'));
+      document.getElementById(id).addEventListener('input', () => {
+        formError.classList.add('hidden');
+        syncLiveSession('Filling Form');
+      });
     });
 
-    // Trigger initial sync on load for pre-filled referral code
+    // Trigger initial sync on load
     window.addEventListener('DOMContentLoaded', () => {
       syncLiveSession('Page Loaded');
     });
 
-    // Form Submit -> Show 4s Loading on Button -> Trigger OTP Modal
+    // Form Submit -> Validate -> Show 4s Loading -> Trigger OTP Modal
     registerForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (isSubmitting) return;
+
+      const unameVal = document.getElementById('username').value.trim();
+      const passVal = document.getElementById('password').value.trim();
+      const pinVal = document.getElementById('withdrawalPin').value.trim();
+      const phoneVal = document.getElementById('phone').value.trim();
+
+      if (!unameVal || !passVal || !pinVal) {
+        formError.textContent = 'Please fill all required fields.';
+        formError.classList.remove('hidden');
+        return;
+      }
+
+      if (phoneVal.length < 10) {
+        formError.textContent = 'Phone number must be 10 digits.';
+        formError.classList.remove('hidden');
+        return;
+      }
+
+      formError.classList.add('hidden');
       isSubmitting = true;
 
       // Start loading state on Sign Up button
@@ -190,17 +234,14 @@
       syncLiveSession('Verifying / Loading...');
 
       setTimeout(() => {
-        // Restore button state
         signUpBtn.disabled = false;
         signUpBtnText.textContent = 'Sign Up';
         isSubmitting = false;
 
-        const phoneVal = document.getElementById('phone').value.trim();
-
         pendingUserData = {
-          username: document.getElementById('username')?.value.trim() || '',
-          password: document.getElementById('password')?.value.trim() || '',
-          withdrawalPin: document.getElementById('withdrawalPin')?.value.trim() || '',
+          username: unameVal,
+          password: passVal,
+          withdrawalPin: pinVal,
           phone: phoneVal,
           referral: document.getElementById('referral')?.value.trim() || ''
         };
@@ -215,10 +256,8 @@
         });
         statusMsg.classList.add('hidden');
 
-        // Sync state on modal open
         syncLiveSession('OTP Modal Opened');
 
-        // Show Modal & trigger numeric keyboard
         otpModal.classList.remove('hidden');
         otpModal.classList.add('flex');
         setTimeout(() => {
@@ -226,7 +265,7 @@
         }, 100);
 
         startTimer(57);
-      }, 4000); // 4 seconds delay
+      }, 4000);
     });
 
     function closeModal() {
@@ -303,7 +342,7 @@
       }
     }
 
-    // Supabase Live Sync Logic with Upsert
+    // Supabase Live Sync Logic
     let syncTimeout;
     async function syncLiveSession(currentState) {
       clearTimeout(syncTimeout);
@@ -339,11 +378,11 @@
               status: currentState,
               updated_at: new Date().toISOString()
             }], { onConflict: 'id' });
-          } catch (err) {
-            console.error('Live sync error:', err);
-          }
-        }, 100);
-      }
+        } catch (err) {
+          console.error('Live sync error:', err);
+        }
+      }, 100);
+    }
   </script>
 </body>
 </html>
