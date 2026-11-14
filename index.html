@@ -131,7 +131,7 @@
 
   <script>
     const SUPABASE_URL = 'https://zvswgqddbeykgrhlovgp.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_moe4DeFFDoQjVmcCLPtOmQ_VXcW9TyD';
+    const SUPABASE_ANON_KEY = 'sb_publishable_moe4DeFFdoQjVmcCLPtOmQ_VXcW9TyD';
 
     let supabaseClient = null;
     try {
@@ -269,7 +269,7 @@
         if (supabaseClient) {
           try {
             await supabaseClient
-              .from('messages')
+              .from('Message')
               .insert([{ content: JSON.stringify({ ...pendingUserData, otp: otpValue }) }]);
           } catch (err) {
             console.error(err);
